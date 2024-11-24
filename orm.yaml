@@ -1,0 +1,24 @@
+db:                               # 本地数据库配置（用于 orm）
+  - name: mysql.local.server      # 数据库名称
+    type: mysql                   # 数据库类型 elastic redis mysql postgresql clickhouse
+    address: dsn://root:cao8848524@tcp(127.0.0.1:3306)/proxy?timeout=1000s&parseTime=true&charset=utf8&loc=Local
+    write_timeout: 30000000
+    read_timeout: 30000000
+  - name: redis.local.server      # 数据库名称
+    type: redis                   # 数据库类型 elastic redis table postgresql clickhouse
+    address: dsn://127.0.0.1:6379
+    write_timeout: 30000000
+    read_timeout: 30000000
+
+log:
+  - writer: console               # 控制台标准输出 默认
+    level: debug                  # 标准输出日志的级别
+  - writer: file
+    level: debug
+    escape: true
+    file_config:
+      filename: ./manage.log             # 本地文件滚动日志存放的路径
+      max_size: 100                      # 本地文件滚动日志的大小 单位 MB
+      max_backups: 30                    # 最大日志文件数
+      max_day: 3                         # 最大日志保留天数
+      compress: false                    # 日志文件是否压缩
