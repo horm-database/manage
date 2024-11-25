@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/horm/common/codec"
-	"github.com/horm/go-horm/horm"
+	"github.com/horm-database/common/codec"
+	"github.com/horm-database/go-horm/horm"
 )
 
 func AddSearchKeyword(ctx context.Context, sk *TblSearchKeyword) {

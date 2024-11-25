@@ -3,8 +3,8 @@ package cache
 import (
 	"context"
 
-	"github.com/horm/manage/consts"
-	"github.com/horm/orm"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/orm"
 )
 
 // GetCacheORM 获取经校验后的 ORM

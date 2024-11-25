@@ -3,9 +3,9 @@ package table
 import (
 	"context"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/server/model/table"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/server/model/table"
 )
 
 func ReplaceFilterConfig(ctx context.Context, filterConfig *table.TblFilterConfig) error {

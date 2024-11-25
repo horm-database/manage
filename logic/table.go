@@ -4,13 +4,13 @@ import (
 	"context"
 	"time"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	cc "github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
-	"github.com/horm/orm/obj"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	cc "github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	"github.com/horm-database/orm/obj"
+	"github.com/samber/lo"
 )
 
 // AddTable 新增表
@@ -125,7 +125,7 @@ func TableDetail(ctx context.Context, userid uint64, tableID int) (*pb.TableDeta
 	}
 
 	if myRole == cc.ProductRoleManager || (myRole != cc.ProductRoleNotJoin &&
-		myRole != cc.ProductRoleExpired && types.InArrayUint64(dbManagerUids, userid)) {
+		myRole != cc.ProductRoleExpired && lo.IndexOf(dbManagerUids, userid) != -1) {
 		ret.IsManager = true
 	}
 

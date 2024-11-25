@@ -1,7 +1,7 @@
 package mail
 
 import (
-	"github.com/horm/manage/util"
+	"github.com/horm-database/manage/util"
 )
 
 // SendMail 发送邮箱

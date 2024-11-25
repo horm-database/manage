@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/go-horm/horm"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
 )
 
 func GetCollectTable(ctx context.Context, userid uint64, page, size int) (*proto.Detail, []*TblCollectTable, error) {

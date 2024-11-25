@@ -4,14 +4,14 @@ import (
 	"context"
 	"strings"
 
-	"github.com/horm/common/consts"
-	"github.com/horm/common/errs"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	mc "github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
-	sc "github.com/horm/server/consts"
-	st "github.com/horm/server/model/table"
+	"github.com/horm-database/common/consts"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	mc "github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	sc "github.com/horm-database/server/consts"
+	st "github.com/horm-database/server/model/table"
 )
 
 func DBSupportOps(ctx context.Context, userid uint64, dbID int) (*pb.SupportOpsResponse, error) {

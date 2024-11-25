@@ -3,10 +3,10 @@ package api
 import (
 	"context"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/logic"
-	"github.com/horm/manage/srv/transport/web/head"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/logic"
+	"github.com/horm-database/manage/srv/transport/web/head"
 )
 
 // AddFilter 新增插件

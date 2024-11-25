@@ -3,13 +3,12 @@ package main
 import (
 	"time"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/log"
-	"github.com/horm/manage/api"
-	"github.com/horm/manage/auth"
-	"github.com/horm/manage/srv"
-	"github.com/horm/manage/srv/codec"
-
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/log"
+	"github.com/horm-database/manage/api"
+	"github.com/horm-database/manage/auth"
+	"github.com/horm-database/manage/srv"
+	"github.com/horm-database/manage/srv/codec"
 	_ "go.uber.org/automaxprocs"
 )
 

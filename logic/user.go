@@ -7,16 +7,17 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/horm/common/crypto"
-	"github.com/horm/common/errs"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/cache"
-	"github.com/horm/manage/model/mail"
-	"github.com/horm/manage/model/table"
-	"github.com/horm/manage/srv/transport/web/head"
+	"github.com/horm-database/common/crypto"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/cache"
+	"github.com/horm-database/manage/model/mail"
+	"github.com/horm-database/manage/model/table"
+	"github.com/horm-database/manage/srv/transport/web/head"
+	"github.com/samber/lo"
 )
 
 // SendEmailCode 发送邮箱验证码
@@ -302,5 +303,5 @@ func GetUserIds(userIds ...interface{}) []uint64 {
 		}
 	}
 
-	return types.UniqUint64(ret)
+	return lo.Uniq(ret)
 }

@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/consts"
-	"github.com/horm/server/model/table"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/server/model/table"
 )
 
 func AddApp(ctx context.Context, appInfo *table.TblAppInfo) error {

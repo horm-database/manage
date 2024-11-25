@@ -14,12 +14,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/horm/common/codec"
-	"github.com/horm/common/errs"
-	"github.com/horm/common/log"
-	"github.com/horm/common/snowflake"
-	cc "github.com/horm/manage/srv/codec"
-	"github.com/horm/manage/srv/transport"
+	"github.com/horm-database/common/codec"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/log"
+	"github.com/horm-database/common/snowflake"
+	cc "github.com/horm-database/manage/srv/codec"
+	"github.com/horm-database/manage/srv/transport"
 
 	"github.com/kavu/go_reuseport"
 	"golang.org/x/net/http2"

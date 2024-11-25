@@ -5,15 +5,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/json"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	cc "github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
-	"github.com/horm/server/consts"
-	st "github.com/horm/server/model/table"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/json"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	cc "github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	"github.com/horm-database/server/consts"
+	"github.com/horm-database/server/filter/conf"
+	st "github.com/horm-database/server/model/table"
+	"github.com/samber/lo"
 )
 
 // TableFilters 表插件
@@ -75,17 +77,18 @@ func TableFilters(ctx context.Context, userid uint64, tableID int) (*pb.TableFil
 
 	for _, tableFilter := range tableFilters {
 		filter := pb.TableFilter{
-			Id:            tableFilter.Id,
-			TableId:       tableFilter.TableId,
-			FilterId:      tableFilter.FilterId,
-			FilterVersion: tableFilter.FilterVersion,
-			Type:          tableFilter.Type,
-			Front:         tableFilter.Front,
-			Desc:          tableFilter.Desc,
-			Status:        tableFilter.Status,
-			CreatedAt:     tableFilter.CreatedAt.Unix(),
-			UpdatedAt:     tableFilter.UpdatedAt.Unix(),
-			FilterConfigs: []*pb.TableFilterConfig{},
+			Id:             tableFilter.Id,
+			TableId:        tableFilter.TableId,
+			FilterId:       tableFilter.FilterId,
+			FilterVersion:  tableFilter.FilterVersion,
+			Type:           tableFilter.Type,
+			Front:          tableFilter.Front,
+			Desc:           tableFilter.Desc,
+			Status:         tableFilter.Status,
+			CreatedAt:      tableFilter.CreatedAt.Unix(),
+			UpdatedAt:      tableFilter.UpdatedAt.Unix(),
+			FilterConfigs:  []*pb.TableFilterConfig{},
+			ScheduleConfig: &conf.ScheduleConfig{},
 		}
 
 		filterInfo := filterInfoMaps[tableFilter.FilterId]
@@ -191,7 +194,7 @@ func AddTableFilter(ctx context.Context, userid uint64,
 	}
 
 	supportVersions := types.SplitInt(filter.Version, ",")
-	if !types.InArrayInt(supportVersions, req.FilterVersion) {
+	if lo.IndexOf(supportVersions, req.FilterVersion) == -1 {
 		return nil, errs.Newf(errs.RetWebNotFindFilter,
 			"filter %s not support version %d", filter.Name, req.FilterVersion)
 	}
@@ -201,7 +204,7 @@ func AddTableFilter(ctx context.Context, userid uint64,
 	}
 
 	supportTypes := FilterTypes(filter.SupportTypes)
-	if !types.InArrayInt8(supportTypes, req.Type) {
+	if lo.IndexOf(supportTypes, req.Type) == -1 {
 		return nil, errs.Newf(errs.RetWebNotFindFilter,
 			"filter %s not support %s", filter.Name, FilterTypeDesc(req.Type))
 	}
@@ -271,13 +274,13 @@ func UpdateTableFilter(ctx context.Context, userid uint64, req *pb.UpdateTableFi
 	}
 
 	supportVersions := types.SplitInt(filter.Version, ",")
-	if !types.InArrayInt(supportVersions, req.FilterVersion) {
+	if lo.IndexOf(supportVersions, req.FilterVersion) == -1 {
 		return errs.Newf(errs.RetWebNotFindFilter,
 			"filter %s not support version %d", filter.Name, req.FilterVersion)
 	}
 
 	supportTypes := FilterTypes(filter.SupportTypes)
-	if !types.InArrayInt8(supportTypes, req.Type) {
+	if lo.IndexOf(supportTypes, req.Type) == -1 {
 		return errs.Newf(errs.RetWebNotFindFilter,
 			"filter %s not support %s", filter.Name, FilterTypeDesc(req.Type))
 	}

@@ -3,15 +3,15 @@ package api
 import (
 	"context"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/json"
-	"github.com/horm/common/types"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/auth"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/logic"
-	"github.com/horm/manage/model/table"
-	"github.com/horm/manage/srv/transport/web/head"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/json"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/auth"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/logic"
+	"github.com/horm-database/manage/model/table"
+	"github.com/horm-database/manage/srv/transport/web/head"
 )
 
 // WorkspaceBaseInfo 工作空间基础信息

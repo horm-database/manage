@@ -9,12 +9,12 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/horm/common/log/logger"
-	"github.com/horm/common/util"
-	"github.com/horm/manage/srv/codec"
-	"github.com/horm/manage/srv/naming"
-	"github.com/horm/manage/srv/transport"
-	"github.com/horm/manage/srv/transport/web"
+	"github.com/horm-database/common/log/logger"
+	"github.com/horm-database/common/util"
+	"github.com/horm-database/manage/srv/codec"
+	"github.com/horm-database/manage/srv/naming"
+	"github.com/horm-database/manage/srv/transport"
+	"github.com/horm-database/manage/srv/transport/web"
 	"go.uber.org/automaxprocs/maxprocs"
 )
 

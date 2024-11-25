@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
-	"github.com/horm/orm/obj"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	"github.com/horm-database/orm/obj"
+	"github.com/samber/lo"
 )
 
 // AddDB 新增数据库
@@ -76,7 +77,7 @@ func MaintainDBManager(ctx context.Context, userid uint64, req *pb.MaintainDBMan
 		return err
 	}
 
-	managerUids := types.UniqUint64(req.Manager)
+	managerUids := lo.Uniq(req.Manager)
 
 	members, err := table.GetProductMemberByUsers(ctx, db.ProductID, managerUids)
 	if err != nil {
@@ -171,7 +172,7 @@ func DBBase(ctx context.Context, userid uint64, dbID int) (*pb.DBBaseResponse, e
 	}
 
 	if myRole == consts.ProductRoleManager || (myRole != consts.ProductRoleNotJoin &&
-		myRole != consts.ProductRoleExpired && types.InArrayUint64(dbManagerUids, userid)) {
+		myRole != consts.ProductRoleExpired && lo.IndexOf(dbManagerUids, userid) != -1) {
 		ret.IsManager = true
 	}
 
@@ -240,7 +241,7 @@ func IsDBManager(ctx context.Context, userid uint64, dbID int) (*obj.TblDB, erro
 	}
 
 	// user is db manager
-	if types.InArrayUint64(dbManagerUids, userid) {
+	if lo.IndexOf(dbManagerUids, userid) != -1 {
 		return db, nil
 	}
 

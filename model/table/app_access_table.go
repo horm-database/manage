@@ -3,9 +3,9 @@ package table
 import (
 	"context"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/server/model/table"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/server/model/table"
 )
 
 func GetAppAccessTables(ctx context.Context, appids []uint64, tableID int) ([]*table.TblAccessTable, error) {

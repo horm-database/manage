@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/horm/common/crypto"
-	"github.com/horm/manage/srv/transport/web/head"
+	"github.com/horm-database/common/crypto"
+	"github.com/horm-database/manage/srv/transport/web/head"
 )
 
 var SameRequestLock = new(sync.RWMutex)

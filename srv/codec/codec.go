@@ -3,8 +3,8 @@
 package codec
 
 import (
-	"github.com/horm/common/codec"
-	"github.com/horm/manage/srv/transport/web/head"
+	"github.com/horm-database/common/codec"
+	"github.com/horm-database/manage/srv/transport/web/head"
 )
 
 // Codec defines the interface of business communication protocol,

@@ -3,12 +3,12 @@ package api
 import (
 	"context"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/logic"
-	"github.com/horm/manage/srv/transport/web/head"
-	sc "github.com/horm/server/consts"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/logic"
+	"github.com/horm-database/manage/srv/transport/web/head"
+	sc "github.com/horm-database/server/consts"
 )
 
 // DBSupportOps 数据库所支持的所有操作

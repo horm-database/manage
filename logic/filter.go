@@ -4,14 +4,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
-	sc "github.com/horm/server/consts"
-	"github.com/horm/server/filter/conf"
-	st "github.com/horm/server/model/table"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	sc "github.com/horm-database/server/consts"
+	"github.com/horm-database/server/filter/conf"
+	st "github.com/horm-database/server/model/table"
 )
 
 // AddFilter 新增插件

@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
 )
 
 func IndexTableList(ctx context.Context, req *pb.IndexTableListRequest) (*pb.IndexTableListResponse, error) {

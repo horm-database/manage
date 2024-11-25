@@ -9,14 +9,14 @@ import (
 	"strings"
 	"time"
 
-	cc "github.com/horm/common/codec"
-	"github.com/horm/common/consts"
-	"github.com/horm/common/errs"
-	"github.com/horm/common/json"
-	"github.com/horm/common/types"
-	"github.com/horm/common/util"
-	"github.com/horm/manage/srv/codec"
-	"github.com/horm/manage/srv/transport/web/head"
+	cc "github.com/horm-database/common/codec"
+	"github.com/horm-database/common/consts"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/json"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/common/util"
+	"github.com/horm-database/manage/srv/codec"
+	"github.com/horm-database/manage/srv/transport/web/head"
 )
 
 var contentTypeSerializationType = map[string]int{

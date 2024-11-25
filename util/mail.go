@@ -5,7 +5,7 @@ import (
 	"net/smtp"
 	"strings"
 
-	"github.com/horm/common/errs"
+	"github.com/horm-database/common/errs"
 )
 
 // SendMail 发送邮箱

@@ -7,18 +7,19 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/horm/common/crypto"
-	"github.com/horm/common/errs"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
-	st "github.com/horm/server/model/table"
+	"github.com/horm-database/common/crypto"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	st "github.com/horm-database/server/model/table"
+	"github.com/samber/lo"
 )
 
 func AddApp(ctx context.Context, userid uint64, req *pb.AddAppRequest) (*pb.AddAppResponse, error) {
-	if !types.InArrayUint64(req.Manager, userid) {
+	if lo.IndexOf(req.Manager, userid) == -1 {
 		req.Manager = append(req.Manager, userid)
 	}
 
@@ -97,7 +98,7 @@ func MaintainAppManager(ctx context.Context, userid uint64, req *pb.MaintainAppM
 		return err
 	}
 
-	managerUids := types.UniqUint64(req.Manager)
+	managerUids := lo.Uniq(req.Manager)
 
 	update := horm.Map{
 		"manager": types.JoinUint64(managerUids, ","),
@@ -198,7 +199,7 @@ func IsAppManager(ctx context.Context, userid, appid uint64) (*st.TblAppInfo, er
 		return app, errs.Newf(errs.RetWebNotFindApp, "not find app [%d]", appid)
 	}
 
-	if !types.InArrayUint64(GetUserIds(app.Manager), userid) {
+	if lo.IndexOf(GetUserIds(app.Manager), userid) == -1 {
 		return app, errs.Newf(errs.RetWebMemberNotManager, "user is not manager of app [%s]", app.Name)
 	}
 

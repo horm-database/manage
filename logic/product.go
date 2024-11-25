@@ -5,17 +5,18 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/proto"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	"github.com/samber/lo"
 )
 
 func AddProduct(ctx context.Context, userid uint64, req *pb.AddProductRequest) (*pb.AddProductResponse, error) {
-	if !types.InArrayUint64(req.Manager, userid) {
+	if lo.IndexOf(req.Manager, userid) == -1 {
 		req.Manager = append(req.Manager, userid)
 	}
 
@@ -134,7 +135,7 @@ func MaintainProductManager(ctx context.Context, userid uint64, req *pb.Maintain
 		return errs.New(errs.RetWebMemberNotManager, "not product manager")
 	}
 
-	managerUids := types.UniqUint64(req.Manager)
+	managerUids := lo.Uniq(req.Manager)
 
 	members, err := table.GetProductMemberByUsers(ctx, req.ProductID, managerUids)
 	if err != nil {

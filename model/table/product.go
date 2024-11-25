@@ -3,8 +3,8 @@ package table
 import (
 	"context"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/go-horm/horm"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
 )
 
 func AddProduct(ctx context.Context, product *TblProduct) (int, error) {

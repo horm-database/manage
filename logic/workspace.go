@@ -4,14 +4,15 @@ import (
 	"context"
 	"time"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/proto"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
-	tb "github.com/horm/server/model/table"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
+	tb "github.com/horm-database/server/model/table"
+	"github.com/samber/lo"
 )
 
 // WorkspaceBaseInfo 工作空间基础信息
@@ -318,7 +319,7 @@ func MaintainWorkspaceManager(ctx context.Context, userid uint64, workspaceID in
 		return errs.New(errs.RetWebMemberNotManager, "not workspace manager")
 	}
 
-	managerUids := types.UniqUint64(manager)
+	managerUids := lo.Uniq(manager)
 
 	members, err := table.GetWorkspaceMemberByUsers(ctx, workspaceID, managerUids)
 	if err != nil {

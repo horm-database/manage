@@ -1,7 +1,7 @@
 package pb
 
 import (
-	"github.com/horm/server/filter/conf"
+	"github.com/horm-database/server/filter/conf"
 )
 
 type TableFiltersResponse struct {

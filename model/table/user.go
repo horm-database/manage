@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/common/types"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/api/pb"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/api/pb"
+	"github.com/samber/lo"
 )
 
 func GetUserBaseFromUser(user *TblUser) *pb.UsersBase {
@@ -65,7 +65,7 @@ func GetUserBasesByIds(ctx context.Context, userIds []uint64) ([]*pb.UsersBase, 
 		return []*pb.UsersBase{}, nil
 	}
 
-	userIds = types.UniqUint64(userIds)
+	userIds = lo.Uniq(userIds)
 
 	users := []*TblUser{}
 

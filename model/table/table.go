@@ -3,10 +3,10 @@ package table
 import (
 	"context"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/consts"
-	"github.com/horm/orm/obj"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/orm/obj"
 )
 
 func AddTable(ctx context.Context, tb *obj.TblTable) (int, error) {

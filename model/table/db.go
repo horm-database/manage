@@ -3,9 +3,9 @@ package table
 import (
 	"context"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/orm/obj"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/orm/obj"
 )
 
 func AddDB(ctx context.Context, db *obj.TblDB) (int, error) {

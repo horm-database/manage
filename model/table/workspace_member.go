@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/horm/common/proto"
-	"github.com/horm/go-horm/horm"
-	"github.com/horm/manage/consts"
+	"github.com/horm-database/common/proto"
+	"github.com/horm-database/go-horm/horm"
+	"github.com/horm-database/manage/consts"
 )
 
 func InsertWorkspaceMember(ctx context.Context, member *TblWorkspaceMember) error {

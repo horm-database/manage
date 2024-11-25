@@ -4,9 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/manage/consts"
-	"github.com/horm/manage/model/table"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/manage/consts"
+	"github.com/horm-database/manage/model/table"
 )
 
 var CurrentWorkspaceID int

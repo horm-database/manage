@@ -6,13 +6,13 @@ package api
 import (
 	"context"
 
-	"github.com/horm/common/errs"
-	"github.com/horm/common/json"
-	"github.com/horm/common/types"
-	"github.com/horm/manage/auth"
-	"github.com/horm/manage/model/table"
-	"github.com/horm/manage/srv"
-	"github.com/horm/manage/srv/transport/web/head"
+	"github.com/horm-database/common/errs"
+	"github.com/horm-database/common/json"
+	"github.com/horm-database/common/types"
+	"github.com/horm-database/manage/auth"
+	"github.com/horm-database/manage/model/table"
+	"github.com/horm-database/manage/srv"
+	"github.com/horm-database/manage/srv/transport/web/head"
 )
 
 /* *************** Api Definition *************** */
