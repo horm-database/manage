@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/horm-database/common/errs"
 	"github.com/horm-database/common/log"
 	"github.com/horm-database/manage/api"
@@ -14,10 +12,6 @@ import (
 
 func main() {
 	server := srv.NewServer(api.ServerDesc)
-
-	go func() {
-		time.Sleep(10 * time.Millisecond)
-	}()
 
 	err := auth.InitWorkspaceID(codec.GCtx)
 	if err != nil {

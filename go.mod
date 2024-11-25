@@ -2,14 +2,6 @@ module github.com/horm-database/manage
 
 go 1.19
 
-replace github.com/horm-database/go-horm/horm => ../go-horm/horm
-
-replace github.com/horm-database/common => ../common
-
-replace github.com/horm-database/orm => ../orm
-
-replace github.com/horm-database/server => ../server
-
 require (
 	github.com/golang/protobuf v1.5.3
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
@@ -68,10 +60,10 @@ require (
 )
 
 require (
-	github.com/horm-database/common v0.0.0-00010101000000-000000000000
-	github.com/horm-database/go-horm/horm v0.0.0-00010101000000-000000000000
-	github.com/horm-database/orm v0.0.0-00010101000000-000000000000
-	github.com/horm-database/server v0.0.0-00010101000000-000000000000
+	github.com/horm-database/common v0.0.1
+	github.com/horm-database/go-horm/horm v0.0.2
+	github.com/horm-database/orm v0.0.2
+	github.com/horm-database/server v0.0.1
 	github.com/kavu/go_reuseport v1.5.0
 	github.com/polarismesh/polaris-go v1.5.3
 	github.com/samber/lo v1.47.0
