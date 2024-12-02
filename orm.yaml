@@ -1,0 +1,11 @@
+db:                               # 本地数据库配置（用于 orm）
+  - name: mysql.local.server      # 数据库名称
+    type: mysql                   # 数据库类型 elastic redis mysql postgresql clickhouse
+    address: dsn://root:cao8848524@tcp(127.0.0.1:3306)/proxy?timeout=1000s&parseTime=true&charset=utf8&loc=Local
+    write_timeout: 30000000
+    read_timeout: 30000000
+  - name: redis.local.server      # 数据库名称
+    type: redis                   # 数据库类型 elastic redis table postgresql clickhouse
+    address: dsn://127.0.0.1:6379
+    write_timeout: 30000000
+    read_timeout: 30000000

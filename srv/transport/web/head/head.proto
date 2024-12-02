@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+/* protoc --go_out=./ head.proto */
+
+/* RequestHeader 请求头 */
+message WebReqHeader {
+  string version = 1;          // 客户端版本
+  int32  request_type = 2;     // 请求类型 0-rpc 请求 1-http 请求 2-web 请求
+  uint64 request_id = 3;       // 请求唯一id
+  uint64 timestamp = 4;        // 请求时间戳（精确到毫秒）
+  uint32 timeout = 5;          // 请求超时时间，单位ms
+  uint64 userid = 6;           // 用户id
+  uint32 workspace_id = 7;     // workspace id
+  string ip = 8;               // ip地址
+  string caller = 9;           // 调用方
+  string callee = 10;          // 被调方
+  uint32 auth_rand = 11;       // 随机生成 0-9999999 的数字，相同 timestamp 不允许出现同样的 ip、auth_rand。为了避免碰撞，0-9999999，单机理论最大支持 100 亿/秒的并发。
+  string sign = 12;            // 签名，为 md5(workspace_id+userid+token+version+request_id+timestamp+timeout+caller+auth_rand)
+}
+
+/* ResponseHeader 响应头 */
+message WebRespHeader {
+  string version = 1;          // 客户端版本
+  uint64 request_id = 2;       // 请求唯一id
+}
