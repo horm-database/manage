@@ -1,20 +1,20 @@
 package pb
 
-type FilterListRequest struct {
+type PluginListRequest struct {
 	Page int `json:"page"` // 分页
 	Size int `json:"size"` // 每页大小
 }
 
-type FilterListResponse struct {
+type PluginListResponse struct {
 	Total     uint64        `json:"total"`      // 总数
 	TotalPage uint32        `json:"total_page"` // 总页数
 	Page      int           `json:"page"`       // 分页
 	Size      int           `json:"size"`       // 每页大小
-	Filters   []*FilterBase `json:"filters"`    // 产品列表
+	Plugins   []*PluginBase `json:"plugins"`    // 插件列表
 }
 
-// FilterBase 插件基础信息
-type FilterBase struct {
+// PluginBase 插件基础信息
+type PluginBase struct {
 	Id           int          `json:"id"`            // id
 	Name         string       `json:"name"`          // 产品名称
 	Intro        string       `json:"intro"`         // 中文简介
@@ -30,17 +30,17 @@ type FilterBase struct {
 	UpdatedAt    int64        `json:"update_time"`   // 记录最后修改时间
 }
 
-type FilterConfigsRequest struct {
-	FilterID      int `json:"filter_id"`      // 插件 id
-	FilterVersion int `json:"filter_version"` // 插件版本
+type PluginConfigsRequest struct {
+	PluginID      int `json:"plugin_id"`      // 插件 id
+	PluginVersion int `json:"plugin_version"` // 插件版本
 }
 
-type FilterConfigsResponse struct {
-	Configs []*FilterConfig `json:"configs"`
+type PluginConfigsResponse struct {
+	Configs []*PluginConfig `json:"configs"`
 }
 
-// AddFilterRequest 新增插件
-type AddFilterRequest struct {
+// AddPluginRequest 新增插件
+type AddPluginRequest struct {
 	Name         string `json:"name"`          // 过滤器名称
 	Intro        string `json:"intro"`         // 中文简介
 	Func         string `json:"func"`          // 过滤器注册函数名
@@ -48,23 +48,23 @@ type AddFilterRequest struct {
 	Desc         string `json:"desc"`          // 插件介绍
 }
 
-// UpdateFilterRequest 更新插件
-type UpdateFilterRequest struct {
-	FilterID     int    `json:"filter_id"`     // 插件 id
+// UpdatePluginRequest 更新插件
+type UpdatePluginRequest struct {
+	PluginID     int    `json:"plugin_id"`     // 插件 id
 	Name         string `json:"name"`          // 过滤器名称
 	Intro        string `json:"intro"`         // 中文简介
 	SupportTypes []int8 `json:"support_types"` // 支持的过滤器类型 1-前置过滤器 2-后置过滤器 3-defer 过滤器
 	Desc         string `json:"desc"`          // 插件介绍
 }
 
-type AddFilterResponse struct {
+type AddPluginResponse struct {
 	ID int `json:"id"`
 }
 
-// ReplaceFilterConfigRequest 新增/修改插件配置
-type ReplaceFilterConfigRequest struct {
-	FilterID      int    `json:"filter_id"`      // 插件 id
-	FilterVersion int    `json:"filter_version"` // 插件版本
+// ReplacePluginConfigRequest 新增/修改插件配置
+type ReplacePluginConfigRequest struct {
+	PluginID      int    `json:"plugin_id"`      // 插件 id
+	PluginVersion int    `json:"plugin_version"` // 插件版本
 	Key           string `json:"key"`            // 插件配置 key
 	Name          string `json:"name"`           // 插件配置名
 	Type          int8   `json:"type"`           // 配置类型 1-bool、2-string、3-int、4-uint、5-float、6-枚举、7-时间、8-array、9-map、10-multi-conf
@@ -74,15 +74,15 @@ type ReplaceFilterConfigRequest struct {
 	Desc          string `json:"desc"`           // 配置描述
 }
 
-// DelFilterConfigRequest 删除插件配置
-type DelFilterConfigRequest struct {
-	FilterID      int    `json:"filter_id"`      // 插件 id
-	FilterVersion int    `json:"filter_version"` // 插件版本
+// DelPluginConfigRequest 删除插件配置
+type DelPluginConfigRequest struct {
+	PluginID      int    `json:"plugin_id"`      // 插件 id
+	PluginVersion int    `json:"plugin_version"` // 插件版本
 	Key           string `json:"key"`            // 插件配置 key
 }
 
-// FilterConfig 插件配置
-type FilterConfig struct {
+// PluginConfig 插件配置
+type PluginConfig struct {
 	Id       int    `json:"id"`
 	Key      string `json:"key"`       // 插件配置 key
 	Name     string `json:"name"`      // 插件配置名

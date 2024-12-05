@@ -65,7 +65,7 @@ const (
 )
 
 const (
-	FilterSourceOfficial = 1
-	FilterSourceThird    = 2
-	FilterSourcePrivate  = 3
+	PluginSourceOfficial = 1
+	PluginSourceThird    = 2
+	PluginSourcePrivate  = 3
 )

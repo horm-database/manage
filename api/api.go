@@ -74,19 +74,19 @@ var (
 			{"TableDetail", TableDetail},
 			{"TableAdvanceConfig", TableAdvanceConfig},
 
-			// table filter
-			{"AddTableFilter", AddTableFilter},
-			{"UpdateTableFilter", UpdateTableFilter},
-			{"DelTableFilter", DelTableFilter},
-			{"TableFilters", TableFilters},
+			// table plugin
+			{"AddTablePlugin", AddTablePlugin},
+			{"UpdateTablePlugin", UpdateTablePlugin},
+			{"DelTablePlugin", DelTablePlugin},
+			{"TablePlugins", TablePlugins},
 
-			// filter
-			{"AddFilter", AddFilter},
-			{"UpdateFilter", UpdateFilter},
-			{"ReplaceFilterConfig", ReplaceFilterConfig},
-			{"DelFilterConfig", DelFilterConfig},
-			{"FilterList", FilterList},
-			{"FilterConfigs", FilterConfigs},
+			// plugin
+			{"AddPlugin", AddPlugin},
+			{"UpdatePlugin", UpdatePlugin},
+			{"ReplacePluginConfig", ReplacePluginConfig},
+			{"DelPluginConfig", DelPluginConfig},
+			{"PluginList", PluginList},
+			{"PluginConfigs", PluginConfigs},
 
 			// app
 			{"AddApp", AddApp},

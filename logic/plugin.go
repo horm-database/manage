@@ -10,19 +10,19 @@ import (
 	"github.com/horm-database/manage/consts"
 	"github.com/horm-database/manage/model/table"
 	sc "github.com/horm-database/server/consts"
-	"github.com/horm-database/server/filter/conf"
 	st "github.com/horm-database/server/model/table"
+	"github.com/horm-database/server/plugin/conf"
 )
 
-// AddFilter 新增插件
-func AddFilter(ctx context.Context, userid uint64, req *pb.AddFilterRequest) (*pb.AddFilterResponse, error) {
-	data := st.TblFilter{
+// AddPlugin 新增插件
+func AddPlugin(ctx context.Context, userid uint64, req *pb.AddPluginRequest) (*pb.AddPluginResponse, error) {
+	data := st.TblPlugin{
 		Name:    req.Name,
 		Intro:   req.Intro,
 		Version: "",
 		Func:    req.Func,
 		Online:  consts.StatusOnline,
-		Source:  consts.FilterSourcePrivate,
+		Source:  consts.PluginSourcePrivate,
 		Desc:    req.Desc,
 		Creator: userid,
 		Manager: fmt.Sprint(userid),
@@ -32,15 +32,15 @@ func AddFilter(ctx context.Context, userid uint64, req *pb.AddFilterRequest) (*p
 		data.SupportTypes = types.JoinInt8(req.SupportTypes, ",")
 	}
 
-	id, err := table.AddFilter(ctx, &data)
+	id, err := table.AddPlugin(ctx, &data)
 	if err != nil {
 		return nil, err
 	}
 
-	return &pb.AddFilterResponse{ID: id}, nil
+	return &pb.AddPluginResponse{ID: id}, nil
 }
 
-func UpdateFilter(ctx context.Context, userid uint64, req *pb.UpdateFilterRequest) error {
+func UpdatePlugin(ctx context.Context, userid uint64, req *pb.UpdatePluginRequest) error {
 	update := horm.Map{
 		"name":          req.Name,
 		"intro":         req.Intro,
@@ -48,14 +48,14 @@ func UpdateFilter(ctx context.Context, userid uint64, req *pb.UpdateFilterReques
 		"desc":          req.Desc,
 	}
 
-	return table.UpdateFilterByID(ctx, req.FilterID, update)
+	return table.UpdatePluginByID(ctx, req.PluginID, update)
 }
 
-// ReplaceFilterConfig 新增/修改插件配置
-func ReplaceFilterConfig(ctx context.Context, userid uint64, req *pb.ReplaceFilterConfigRequest) error {
-	data := st.TblFilterConfig{
-		FilterID:      req.FilterID,
-		FilterVersion: req.FilterVersion,
+// ReplacePluginConfig 新增/修改插件配置
+func ReplacePluginConfig(ctx context.Context, userid uint64, req *pb.ReplacePluginConfigRequest) error {
+	data := st.TblPluginConfig{
+		PluginID:      req.PluginID,
+		PluginVersion: req.PluginVersion,
 		Key:           req.Key,
 		Name:          req.Name,
 		Type:          req.Type,
@@ -65,30 +65,30 @@ func ReplaceFilterConfig(ctx context.Context, userid uint64, req *pb.ReplaceFilt
 		Desc:          req.Desc,
 	}
 
-	return table.ReplaceFilterConfig(ctx, &data)
+	return table.ReplacePluginConfig(ctx, &data)
 }
 
-// DelFilterConfig 删除插件配置
-func DelFilterConfig(ctx context.Context, userid uint64, req *pb.DelFilterConfigRequest) error {
-	return table.DelFilterConfigByKey(ctx, req.FilterID, req.FilterVersion, req.Key)
+// DelPluginConfig 删除插件配置
+func DelPluginConfig(ctx context.Context, userid uint64, req *pb.DelPluginConfigRequest) error {
+	return table.DelPluginConfigByKey(ctx, req.PluginID, req.PluginVersion, req.Key)
 }
 
-func FilterList(ctx context.Context, req *pb.FilterListRequest) (*pb.FilterListResponse, error) {
-	pageInfo, filters, err := table.GetFilterList(ctx, req.Page, req.Size)
+func PluginList(ctx context.Context, req *pb.PluginListRequest) (*pb.PluginListResponse, error) {
+	pageInfo, plugins, err := table.GetPluginList(ctx, req.Page, req.Size)
 	if err != nil {
 		return nil, err
 	}
 
-	ret := pb.FilterListResponse{
+	ret := pb.PluginListResponse{
 		Total:     pageInfo.Total,
 		TotalPage: pageInfo.TotalPage,
 		Page:      req.Page,
 		Size:      req.Size,
-		Filters:   make([]*pb.FilterBase, len(filters)),
+		Plugins:   make([]*pb.PluginBase, len(plugins)),
 	}
 
 	var userIds []uint64
-	for _, v := range filters {
+	for _, v := range plugins {
 		userIds = append(userIds, GetUserIds(v.Creator, v.Manager)...)
 	}
 
@@ -97,14 +97,14 @@ func FilterList(ctx context.Context, req *pb.FilterListRequest) (*pb.FilterListR
 		return nil, err
 	}
 
-	for k, v := range filters {
-		ret.Filters[k] = &pb.FilterBase{
+	for k, v := range plugins {
+		ret.Plugins[k] = &pb.PluginBase{
 			Id:           v.Id,
 			Name:         v.Name,
 			Intro:        v.Intro,
 			Version:      types.SplitInt(v.Version, ","),
 			Func:         v.Func,
-			SupportTypes: FilterTypes(v.SupportTypes),
+			SupportTypes: PluginTypes(v.SupportTypes),
 			Online:       v.Online,
 			Source:       v.Source,
 			Desc:         v.Desc,
@@ -118,19 +118,19 @@ func FilterList(ctx context.Context, req *pb.FilterListRequest) (*pb.FilterListR
 	return &ret, nil
 }
 
-// FilterConfigs 插件配置列表
-func FilterConfigs(ctx context.Context, req *pb.FilterConfigsRequest) (*pb.FilterConfigsResponse, error) {
-	filterConfigs, err := table.GetFilterConfigs(ctx, req.FilterID, req.FilterVersion)
+// PluginConfigs 插件配置列表
+func PluginConfigs(ctx context.Context, req *pb.PluginConfigsRequest) (*pb.PluginConfigsResponse, error) {
+	pluginConfigs, err := table.GetPluginConfigs(ctx, req.PluginID, req.PluginVersion)
 	if err != nil {
 		return nil, err
 	}
 
-	ret := pb.FilterConfigsResponse{
-		Configs: make([]*pb.FilterConfig, len(filterConfigs)),
+	ret := pb.PluginConfigsResponse{
+		Configs: make([]*pb.PluginConfig, len(pluginConfigs)),
 	}
 
-	for k, v := range filterConfigs {
-		ret.Configs[k] = &pb.FilterConfig{
+	for k, v := range pluginConfigs {
+		ret.Configs[k] = &pb.PluginConfig{
 			Id:       v.Id,
 			Key:      v.Key,
 			Name:     v.Name,
@@ -147,18 +147,18 @@ func FilterConfigs(ctx context.Context, req *pb.FilterConfigsRequest) (*pb.Filte
 
 ///////////////////////////////// function /////////////////////////////////////////
 
-func FiltersToMap(filters []*st.TblFilter) map[int]*st.TblFilter {
-	ret := map[int]*st.TblFilter{}
-	for _, v := range filters {
+func PluginsToMap(plugins []*st.TblPlugin) map[int]*st.TblPlugin {
+	ret := map[int]*st.TblPlugin{}
+	for _, v := range plugins {
 		ret[v.Id] = v
 	}
 	return ret
 }
 
-func FilterConfigsToMap(filterConfigs []*st.TblFilterConfig) map[string][]*st.TblFilterConfig {
-	ret := map[string][]*st.TblFilterConfig{}
-	for _, v := range filterConfigs {
-		key := fmt.Sprintf("%d_%d", v.FilterID, v.FilterVersion)
+func PluginConfigsToMap(pluginConfigs []*st.TblPluginConfig) map[string][]*st.TblPluginConfig {
+	ret := map[string][]*st.TblPluginConfig{}
+	for _, v := range pluginConfigs {
+		key := fmt.Sprintf("%d_%d", v.PluginID, v.PluginVersion)
 		ret[key] = append(ret[key], v)
 	}
 	return ret
@@ -184,21 +184,21 @@ func GetDefaultScheduleConfig() *conf.ScheduleConfig {
 	}
 }
 
-func FilterTypes(typ string) []int8 {
+func PluginTypes(typ string) []int8 {
 	if typ == "" {
-		return []int8{sc.PreFilter, sc.PostFilter, sc.DeferFilter}
+		return []int8{sc.PrePlugin, sc.PostPlugin, sc.DeferPlugin}
 	}
 
 	return types.SplitInt8(typ, ",")
 }
 
-func FilterTypeDesc(typ int8) string {
+func PluginTypeDesc(typ int8) string {
 	switch typ {
-	case sc.PreFilter:
-		return "pre-filter"
-	case sc.PostFilter:
-		return "post-filter"
+	case sc.PrePlugin:
+		return "pre-plugin"
+	case sc.PostPlugin:
+		return "post-plugin"
 	default:
-		return "defer-filter"
+		return "defer-plugin"
 	}
 }
