@@ -10,13 +10,13 @@ import (
 )
 
 func InsertProductMember(ctx context.Context, member *TblProductMember) (int, error) {
-	modResult := proto.ModResult{}
-	_, err := GetTableORM("tbl_product_member").Insert(member).Exec(ctx, &modResult)
+	modRet := proto.ModRet{}
+	_, err := GetTableORM("tbl_product_member").Insert(member).Exec(ctx, &modRet)
 	if err != nil {
 		return 0, err
 	}
 
-	return modResult.ID.Int(), nil
+	return modRet.ID.Int(), nil
 }
 
 func ReplaceProductMember(ctx context.Context, member horm.Map) error {

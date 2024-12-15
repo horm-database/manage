@@ -8,13 +8,13 @@ import (
 )
 
 func AddProduct(ctx context.Context, product *TblProduct) (int, error) {
-	modResult := proto.ModResult{}
-	_, err := GetTableORM("tbl_product").Insert(product).Exec(ctx, &modResult)
+	modRet := proto.ModRet{}
+	_, err := GetTableORM("tbl_product").Insert(product).Exec(ctx, &modRet)
 	if err != nil {
 		return 0, err
 	}
 
-	return modResult.ID.Int(), nil
+	return modRet.ID.Int(), nil
 }
 
 func UpdateProductByID(ctx context.Context, id int, update horm.Map) error {

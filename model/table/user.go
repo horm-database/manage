@@ -99,7 +99,7 @@ func GetUserBasesMapByIds(ctx context.Context, userIds []uint64) (map[uint64]*pb
 }
 
 func GetSequence(ctx context.Context) (uint64, error) {
-	ret := proto.ModResult{}
+	ret := proto.ModRet{}
 	_, err := GetTableORM("tbl_sequence").Insert(horm.Map{"created_at": time.Now()}).Exec(ctx, &ret)
 
 	if err != nil {

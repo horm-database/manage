@@ -9,13 +9,13 @@ import (
 )
 
 func AddDB(ctx context.Context, db *obj.TblDB) (int, error) {
-	modResult := proto.ModResult{}
-	_, err := GetTableORM("tbl_db").Insert(db).Exec(ctx, &modResult)
+	modRet := proto.ModRet{}
+	_, err := GetTableORM("tbl_db").Insert(db).Exec(ctx, &modRet)
 	if err != nil {
 		return 0, err
 	}
 
-	return modResult.ID.Int(), nil
+	return modRet.ID.Int(), nil
 }
 
 func UpdateDBByID(ctx context.Context, id int, update horm.Map) error {

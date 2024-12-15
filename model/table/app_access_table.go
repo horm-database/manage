@@ -33,13 +33,13 @@ func GetAppAccessTable(ctx context.Context, appid uint64, tableID int) (bool, *t
 }
 
 func InsertAccessTable(ctx context.Context, accessTable *table.TblAccessTable) (int, error) {
-	modResult := proto.ModResult{}
-	_, err := GetTableORM("tbl_access_table").Insert(accessTable).Exec(ctx, &modResult)
+	modRet := proto.ModRet{}
+	_, err := GetTableORM("tbl_access_table").Insert(accessTable).Exec(ctx, &modRet)
 	if err != nil {
 		return 0, err
 	}
 
-	return modResult.ID.Int(), nil
+	return modRet.ID.Int(), nil
 }
 
 func UpdateAccessTableByID(ctx context.Context, id int, update horm.Map) error {

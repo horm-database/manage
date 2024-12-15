@@ -9,13 +9,13 @@ import (
 )
 
 func InsertTablePlugin(ctx context.Context, tablePlugin *table.TblTablePlugin) (int, error) {
-	modResult := proto.ModResult{}
-	_, err := GetTableORM("tbl_table_plugin").Insert(tablePlugin).Exec(ctx, &modResult)
+	modRet := proto.ModRet{}
+	_, err := GetTableORM("tbl_table_plugin").Insert(tablePlugin).Exec(ctx, &modRet)
 	if err != nil {
 		return 0, err
 	}
 
-	return modResult.ID.Int(), nil
+	return modRet.ID.Int(), nil
 }
 
 func UpdateTablePluginByID(ctx context.Context, id int, update horm.Map) error {

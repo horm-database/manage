@@ -10,13 +10,13 @@ import (
 )
 
 func AddTable(ctx context.Context, tb *obj.TblTable) (int, error) {
-	modResult := proto.ModResult{}
-	_, err := GetTableORM("tbl_table").Insert(tb).Exec(ctx, &modResult)
+	modRet := proto.ModRet{}
+	_, err := GetTableORM("tbl_table").Insert(tb).Exec(ctx, &modRet)
 	if err != nil {
 		return 0, err
 	}
 
-	return modResult.ID.Int(), nil
+	return modRet.ID.Int(), nil
 }
 
 func UpdateTableByID(ctx context.Context, id int, update horm.Map) error {
