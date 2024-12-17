@@ -21,7 +21,7 @@ func UpdateAppByID(ctx context.Context, appid uint64, update horm.Map) error {
 }
 
 func GetAppList(ctx context.Context, userid uint64, page, size int) (*proto.Detail, []*table.TblAppInfo, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	apps := []*table.TblAppInfo{}
 
@@ -36,9 +36,9 @@ func GetAppList(ctx context.Context, userid uint64, page, size int) (*proto.Deta
 		},
 	}
 
-	_, err := GetTableORM("tbl_app_info").FindAll(where).Order("-appid").Page(page, size).Exec(ctx, &pageResult, &apps)
+	_, err := GetTableORM("tbl_app_info").FindAll(where).Order("-appid").Page(page, size).Exec(ctx, &pageRet, &apps)
 
-	return &pageResult, apps, err
+	return &pageRet, apps, err
 }
 
 func GetAppListByAppids(ctx context.Context, appids []uint64) ([]*table.TblAppInfo, error) {

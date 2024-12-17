@@ -257,13 +257,13 @@ func WorkspaceMemberList(ctx context.Context, userid uint64, workspaceID int,
 		return nil, err
 	}
 
-	var pageResult *proto.Detail
+	var pageRet *proto.Detail
 	var members []*table.TblWorkspaceMember
 
 	if myRole == consts.WorkspaceMemberManager {
-		pageResult, members, err = table.GetWorkspaceMembersAll(ctx, workspaceID, req.Page, req.Size)
+		pageRet, members, err = table.GetWorkspaceMembersAll(ctx, workspaceID, req.Page, req.Size)
 	} else {
-		pageResult, members, err = table.GetWorkspaceMembersJoined(ctx, workspaceID, req.Page, req.Size)
+		pageRet, members, err = table.GetWorkspaceMembersJoined(ctx, workspaceID, req.Page, req.Size)
 	}
 
 	if err != nil {
@@ -271,8 +271,8 @@ func WorkspaceMemberList(ctx context.Context, userid uint64, workspaceID int,
 	}
 
 	var ret = pb.WorkspaceMemberListResponse{
-		Total:     pageResult.Total,
-		TotalPage: pageResult.TotalPage,
+		Total:     pageRet.Total,
+		TotalPage: pageRet.TotalPage,
 		Page:      req.Page,
 		Size:      req.Size,
 		IsManager: myRole == consts.WorkspaceMemberManager,

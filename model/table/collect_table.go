@@ -9,7 +9,7 @@ import (
 )
 
 func GetCollectTable(ctx context.Context, userid uint64, page, size int) (*proto.Detail, []*TblCollectTable, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	collectTables := []*TblCollectTable{}
 
@@ -20,9 +20,9 @@ func GetCollectTable(ctx context.Context, userid uint64, page, size int) (*proto
 		FindAll(where).
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &collectTables)
+		Exec(ctx, &pageRet, &collectTables)
 
-	return &pageResult, collectTables, err
+	return &pageRet, collectTables, err
 }
 
 func DelCollectTable(ctx context.Context, userid uint64, tableID int) error {

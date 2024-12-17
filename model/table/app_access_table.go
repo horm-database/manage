@@ -49,7 +49,7 @@ func UpdateAccessTableByID(ctx context.Context, id int, update horm.Map) error {
 
 func GetAppAccessTableListByTableID(ctx context.Context,
 	tableID, page, size int) (*proto.Detail, []*table.TblAccessTable, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	accessTables := []*table.TblAccessTable{}
 
@@ -60,14 +60,14 @@ func GetAppAccessTableListByTableID(ctx context.Context,
 		FindAll(where).
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &accessTables)
+		Exec(ctx, &pageRet, &accessTables)
 
-	return &pageResult, accessTables, err
+	return &pageRet, accessTables, err
 }
 
 func GetAppAccessTablesPages(ctx context.Context, appids []uint64,
 	tableID int, page, size int) (*proto.Detail, []*table.TblAccessTable, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	accessTables := []*table.TblAccessTable{}
 
@@ -76,14 +76,14 @@ func GetAppAccessTablesPages(ctx context.Context, appids []uint64,
 	where["appid"] = appids
 
 	_, err := GetTableORM("tbl_access_table").FindAll(where).Order("-id").
-		Page(page, size).Exec(ctx, &pageResult, &accessTables)
+		Page(page, size).Exec(ctx, &pageRet, &accessTables)
 
-	return &pageResult, accessTables, err
+	return &pageRet, accessTables, err
 }
 
 func GetAppAccessTableListByAppid(ctx context.Context,
 	appid uint64, page, size int) (*proto.Detail, []*table.TblAccessTable, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	accessTables := []*table.TblAccessTable{}
 
@@ -94,7 +94,7 @@ func GetAppAccessTableListByAppid(ctx context.Context,
 		FindAll(where).
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &accessTables)
+		Exec(ctx, &pageRet, &accessTables)
 
-	return &pageResult, accessTables, err
+	return &pageRet, accessTables, err
 }

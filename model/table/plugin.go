@@ -24,7 +24,7 @@ func UpdatePluginByID(ctx context.Context, id int, update horm.Map) error {
 }
 
 func GetPluginList(ctx context.Context, page, size int) (*proto.Detail, []*table.TblPlugin, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	plugins := []*table.TblPlugin{}
 
@@ -32,9 +32,9 @@ func GetPluginList(ctx context.Context, page, size int) (*proto.Detail, []*table
 		FindAll().
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &plugins)
+		Exec(ctx, &pageRet, &plugins)
 
-	return &pageResult, plugins, err
+	return &pageRet, plugins, err
 }
 
 func GetPluginByIDs(ctx context.Context, pluginIDs []int) ([]*table.TblPlugin, error) {

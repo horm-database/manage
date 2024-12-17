@@ -289,23 +289,23 @@ func ProductMemberList(ctx context.Context, userid uint64,
 		Members:    []*pb.ProductMember{},
 	}
 
-	var pageResult *proto.Detail
+	var pageRet *proto.Detail
 	var members []*table.TblProductMember
 
 	switch ret.Role {
 	case consts.ProductRoleManager:
-		pageResult, members, err = table.GetProductMembersAll(ctx, req.ProductID, req.Page, req.Size)
+		pageRet, members, err = table.GetProductMembersAll(ctx, req.ProductID, req.Page, req.Size)
 	case consts.ProductRoleDeveloper, consts.ProductRoleOperator:
-		pageResult, members, err = table.GetProductMembersJoined(ctx, req.ProductID, req.Page, req.Size)
+		pageRet, members, err = table.GetProductMembersJoined(ctx, req.ProductID, req.Page, req.Size)
 	}
 
 	if err != nil {
 		return nil, err
 	}
 
-	if pageResult != nil {
-		ret.Total = pageResult.Total
-		ret.TotalPage = pageResult.TotalPage
+	if pageRet != nil {
+		ret.Total = pageRet.Total
+		ret.TotalPage = pageRet.TotalPage
 	}
 
 	if len(members) > 0 {

@@ -37,7 +37,7 @@ func GetAppAccessDBs(ctx context.Context, appids []uint64, db int) ([]*table.Tbl
 
 func GetAppAccessDBsPages(ctx context.Context, appids []uint64,
 	db int, page, size int) (*proto.Detail, []*table.TblAccessDB, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	accessDBs := []*table.TblAccessDB{}
 
@@ -46,9 +46,9 @@ func GetAppAccessDBsPages(ctx context.Context, appids []uint64,
 	where["appid"] = appids
 
 	_, err := GetTableORM("tbl_access_db").FindAll(where).Order("-id").
-		Page(page, size).Exec(ctx, &pageResult, &accessDBs)
+		Page(page, size).Exec(ctx, &pageRet, &accessDBs)
 
-	return &pageResult, accessDBs, err
+	return &pageRet, accessDBs, err
 }
 
 func GetAppAccessDB(ctx context.Context, appid uint64, db int) (bool, *table.TblAccessDB, error) {
@@ -64,7 +64,7 @@ func GetAppAccessDB(ctx context.Context, appid uint64, db int) (bool, *table.Tbl
 }
 
 func GetAppAccessDBListByDBID(ctx context.Context, db, page, size int) (*proto.Detail, []*table.TblAccessDB, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	accessDBs := []*table.TblAccessDB{}
 
@@ -75,13 +75,13 @@ func GetAppAccessDBListByDBID(ctx context.Context, db, page, size int) (*proto.D
 		FindAll(where).
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &accessDBs)
+		Exec(ctx, &pageRet, &accessDBs)
 
-	return &pageResult, accessDBs, err
+	return &pageRet, accessDBs, err
 }
 
 func GetAppAccessDBListByAppid(ctx context.Context, appid uint64, page, size int) (*proto.Detail, []*table.TblAccessDB, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	accessDBs := []*table.TblAccessDB{}
 
@@ -92,7 +92,7 @@ func GetAppAccessDBListByAppid(ctx context.Context, appid uint64, page, size int
 		FindAll(where).
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &accessDBs)
+		Exec(ctx, &pageRet, &accessDBs)
 
-	return &pageResult, accessDBs, err
+	return &pageRet, accessDBs, err
 }

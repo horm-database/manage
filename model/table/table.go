@@ -25,7 +25,7 @@ func UpdateTableByID(ctx context.Context, id int, update horm.Map) error {
 }
 
 func GetIndexTable(ctx context.Context, page, size int) (*proto.Detail, []*obj.TblTable, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	tables := []*obj.TblTable{}
 
@@ -36,9 +36,9 @@ func GetIndexTable(ctx context.Context, page, size int) (*proto.Detail, []*obj.T
 		FindAll(where).
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &tables)
+		Exec(ctx, &pageRet, &tables)
 
-	return &pageResult, tables, err
+	return &pageRet, tables, err
 }
 
 func GetTableByID(ctx context.Context, id int) (bool, *obj.TblTable, error) {

@@ -57,7 +57,7 @@ func GetProductMemberByUsers(ctx context.Context, productID int, userIds []uint6
 
 func GetProductMembersAll(ctx context.Context,
 	productID, page, size int) (*proto.Detail, []*TblProductMember, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	members := []*TblProductMember{}
 
@@ -68,14 +68,14 @@ func GetProductMembersAll(ctx context.Context,
 		FindAll(where).
 		Order("status", "-updated_at").
 		Page(page, size).
-		Exec(ctx, &pageResult, &members)
+		Exec(ctx, &pageRet, &members)
 
-	return &pageResult, members, err
+	return &pageRet, members, err
 }
 
 func GetProductMembersJoined(ctx context.Context,
 	productID, page, size int) (*proto.Detail, []*TblProductMember, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	members := []*TblProductMember{}
 
@@ -91,7 +91,7 @@ func GetProductMembersJoined(ctx context.Context,
 		FindAll(where).
 		Order("-updated_at").
 		Page(page, size).
-		Exec(ctx, &pageResult, &members)
+		Exec(ctx, &pageRet, &members)
 
-	return &pageResult, members, err
+	return &pageRet, members, err
 }

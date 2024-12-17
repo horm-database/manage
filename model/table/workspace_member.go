@@ -52,7 +52,7 @@ func GetWorkspaceMemberByUsers(ctx context.Context, workspaceID int, userIds []u
 
 func GetWorkspaceMembersAll(ctx context.Context,
 	workspaceID, page, size int) (*proto.Detail, []*TblWorkspaceMember, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	members := []*TblWorkspaceMember{}
 
@@ -63,14 +63,14 @@ func GetWorkspaceMembersAll(ctx context.Context,
 		FindAll(where).
 		Order("status", "-updated_at").
 		Page(page, size).
-		Exec(ctx, &pageResult, &members)
+		Exec(ctx, &pageRet, &members)
 
-	return &pageResult, members, err
+	return &pageRet, members, err
 }
 
 func GetWorkspaceMembersJoined(ctx context.Context,
 	workspaceID, page, size int) (*proto.Detail, []*TblWorkspaceMember, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	members := []*TblWorkspaceMember{}
 
@@ -86,7 +86,7 @@ func GetWorkspaceMembersJoined(ctx context.Context,
 		FindAll(where).
 		Order("-updated_at").
 		Page(page, size).
-		Exec(ctx, &pageResult, &members)
+		Exec(ctx, &pageRet, &members)
 
-	return &pageResult, members, err
+	return &pageRet, members, err
 }

@@ -31,7 +31,7 @@ func GetProductByID(ctx context.Context, id int) (bool, *TblProduct, error) {
 }
 
 func GetProductList(ctx context.Context, status int8, page, size int) (*proto.Detail, []*TblProduct, error) {
-	pageResult := proto.Detail{}
+	pageRet := proto.Detail{}
 
 	products := []*TblProduct{}
 
@@ -44,7 +44,7 @@ func GetProductList(ctx context.Context, status int8, page, size int) (*proto.De
 		FindAll(where).
 		Order("-id").
 		Page(page, size).
-		Exec(ctx, &pageResult, &products)
+		Exec(ctx, &pageRet, &products)
 
-	return &pageResult, products, err
+	return &pageRet, products, err
 }
