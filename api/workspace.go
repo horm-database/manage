@@ -19,7 +19,7 @@ func WorkspaceBaseInfo(ctx context.Context, head *head.WebReqHeader, reqBuf []by
 	req := pb.WorkspaceBaseInfoRequest{}
 	err := json.Api.Unmarshal(reqBuf, &req)
 	if err != nil {
-		return nil, errs.Newf(errs.RetServerDecodeFail,
+		return nil, errs.Newf(errs.ErrServerDecode,
 			"decode request error: %v, request:[%s]", err, types.QuickReplaceLFCR2Space(reqBuf))
 	}
 
@@ -35,7 +35,7 @@ func WorkspaceJoinApply(ctx context.Context, head *head.WebReqHeader, reqBuf []b
 	req := pb.WorkspaceJoinApplyRequest{}
 	err := json.Api.Unmarshal(reqBuf, &req)
 	if err != nil {
-		return nil, errs.Newf(errs.RetServerDecodeFail,
+		return nil, errs.Newf(errs.ErrServerDecode,
 			"decode request error: %v, request:[%s]", err, types.QuickReplaceLFCR2Space(reqBuf))
 	}
 

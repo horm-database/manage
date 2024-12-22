@@ -126,7 +126,7 @@ func DecodeAndAuth(ctx context.Context, header *head.WebReqHeader, reqBuf []byte
 	if req != nil {
 		err = json.Api.Unmarshal(reqBuf, req)
 		if err != nil {
-			return errs.Newf(errs.RetServerDecodeFail,
+			return errs.Newf(errs.ErrServerDecode,
 				"decode request error: %v, request:[%s]", err, types.QuickReplaceLFCR2Space(reqBuf))
 		}
 	}

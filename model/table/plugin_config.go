@@ -45,7 +45,7 @@ func GetConfigsByPluginIDVersions(ctx context.Context, idVersions ...int) ([]*ta
 	}
 
 	if len(idVersions)%2 != 0 {
-		return nil, errs.New(errs.RetSystem, "GetConfigsByPluginIDVersions input idVersion is invalid")
+		return nil, errs.New(errs.ErrSystem, "GetConfigsByPluginIDVersions input idVersion is invalid")
 	}
 
 	tmp := horm.Where{}

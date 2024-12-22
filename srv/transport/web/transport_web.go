@@ -68,7 +68,7 @@ func (t *transportWeb) Serve(ctx context.Context, opts *transport.Options) error
 
 		_, err := opts.Handler.Handle(webCtx, []byte{})
 		if err != nil {
-			log.Error(cc.GCtx, errs.RetSystem, "web server handle error: ", err)
+			log.Error(cc.GCtx, errs.ErrSystem, "web server handle error: ", err)
 			return
 		}
 	}
@@ -105,7 +105,7 @@ func (t *transportWeb) serveWeb(ctx context.Context, s *http.Server, opts *trans
 			)
 
 			if err != http.ErrServerClosed {
-				log.Error(cc.GCtx, errs.RetSystem, "serve TLS failed: ", err)
+				log.Error(cc.GCtx, errs.ErrSystem, "serve TLS failed: ", err)
 			}
 		}()
 	} else {

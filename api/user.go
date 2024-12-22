@@ -16,7 +16,7 @@ func SendEmailCode(ctx context.Context, head *head.WebReqHeader, reqBuf []byte) 
 	req := pb.SendEmailCodeRequest{}
 	err := json.Api.Unmarshal(reqBuf, &req)
 	if err != nil {
-		return nil, errs.Newf(errs.RetServerDecodeFail,
+		return nil, errs.Newf(errs.ErrServerDecode,
 			"decode request error: %v, request:[%s]", err, types.QuickReplaceLFCR2Space(reqBuf))
 	}
 
@@ -32,7 +32,7 @@ func Register(ctx context.Context, head *head.WebReqHeader, reqBuf []byte) (inte
 	req := pb.RegisterRequest{}
 	err := json.Api.Unmarshal(reqBuf, &req)
 	if err != nil {
-		return nil, errs.Newf(errs.RetServerDecodeFail,
+		return nil, errs.Newf(errs.ErrServerDecode,
 			"decode request error: %v, request:[%s]", err, types.QuickReplaceLFCR2Space(reqBuf))
 	}
 
@@ -47,7 +47,7 @@ func Login(ctx context.Context, head *head.WebReqHeader, reqBuf []byte) (interfa
 	req := pb.LoginRequest{}
 	err := json.Api.Unmarshal(reqBuf, &req)
 	if err != nil {
-		return nil, errs.Newf(errs.RetServerDecodeFail,
+		return nil, errs.Newf(errs.ErrServerDecode,
 			"decode request error: %v, request:[%s]", err, types.QuickReplaceLFCR2Space(reqBuf))
 	}
 
@@ -62,7 +62,7 @@ func ResetPassword(ctx context.Context, head *head.WebReqHeader, reqBuf []byte) 
 	req := pb.ResetPasswordRequest{}
 	err := json.Api.Unmarshal(reqBuf, &req)
 	if err != nil {
-		return nil, errs.Newf(errs.RetServerDecodeFail,
+		return nil, errs.Newf(errs.ErrServerDecode,
 			"decode request error: %v, request:[%s]", err, types.QuickReplaceLFCR2Space(reqBuf))
 	}
 

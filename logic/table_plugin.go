@@ -385,7 +385,7 @@ func sortTablePlugins(typ string, tablePlugins []*pb.TablePlugin) ([]*pb.TablePl
 	}
 
 	if head == nil {
-		return nil, errs.Newf(errs.RetPluginFrontNotFind,
+		return nil, errs.Newf(errs.ErrPrefixPluginNotFount,
 			"table_id %d not find head of %s", tablePlugins[0].TableId, typ)
 	}
 

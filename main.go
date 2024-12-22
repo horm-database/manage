@@ -15,7 +15,7 @@ func main() {
 
 	err := auth.InitWorkspaceID(codec.GCtx)
 	if err != nil {
-		panic(errs.Newf(errs.RetSystem, "init workspace id error: %v", err))
+		panic(errs.Newf(errs.ErrSystem, "init workspace id error: %v", err))
 	}
 
 	if err := server.Serve(); err != nil {
