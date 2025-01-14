@@ -61,8 +61,8 @@ require (
 
 require (
 	github.com/horm-database/common v0.0.1
-	github.com/horm-database/go-horm/horm v0.0.2
-	github.com/horm-database/orm v0.0.2
+	github.com/horm-database/go-horm/horm v0.0.1
+	github.com/horm-database/orm v0.0.1
 	github.com/horm-database/server v0.0.1
 	github.com/kavu/go_reuseport v1.5.0
 	github.com/polarismesh/polaris-go v1.5.3
